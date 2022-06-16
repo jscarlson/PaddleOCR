@@ -12,10 +12,10 @@ Global:
   pretrained_model: ./japan_mobile_v2.0_rec_train/best_accuracy
   checkpoints: 
   save_inference_dir:
-  use_visualdl: False
+  use_wandb: True
   infer_img:
   # for data or label process
-  character_dict_path: /srv/ocr/github_repos/ocr-as-retrieval/full_charset_jp.txt
+  character_dict_path: /srv/ocr/github_repos/ocr-as-retrieval/full_charset_jp_converted.txt
   max_text_length: 25
   infer_mode: False
   use_space_char: False

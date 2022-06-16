@@ -11,9 +11,9 @@ Global:
   pretrained_model: ./japan_PP-OCRv3_rec_train/best_accuracy
   checkpoints:
   save_inference_dir:
-  use_visualdl: false
+  use_wandb: true
   infer_img: doc/imgs_words/ch/word_1.jpg
-  character_dict_path: /srv/ocr/github_repos/ocr-as-retrieval/full_charset_jp.txt
+  character_dict_path: /srv/ocr/github_repos/ocr-as-retrieval/full_charset_jp_converted.txt
   max_text_length: &max_text_length 25
   infer_mode: false
   use_space_char: true
