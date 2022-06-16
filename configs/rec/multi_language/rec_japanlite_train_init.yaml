@@ -57,7 +57,7 @@ PostProcess:
 
 Metric:
   name: RecMetric
-  main_indicator: norm_edit_dis
+  main_indicator: cer
 
 Train:
   dataset:
