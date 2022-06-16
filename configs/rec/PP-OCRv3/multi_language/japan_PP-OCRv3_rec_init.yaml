@@ -12,7 +12,7 @@ Global:
   checkpoints:
   save_inference_dir:
   use_wandb: true
-  infer_img: doc/imgs_words/ch/word_1.jpg
+  infer_img:
   character_dict_path: /srv/ocr/github_repos/ocr-as-retrieval/full_charset_jp_converted.txt
   max_text_length: &max_text_length 25
   infer_mode: false
