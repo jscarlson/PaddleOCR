@@ -64,7 +64,7 @@ class RecMetric(object):
         return {
             'acc': correct_num / (all_num + self.eps),
             'norm_edit_dis': 1 - norm_edit_dis / (all_num + self.eps),
-            'cer': cer / char_num
+            'cer': 1 - (cer / char_num)
         }
 
     def get_metric(self):
@@ -76,7 +76,7 @@ class RecMetric(object):
         """
         acc = 1.0 * self.correct_num / (self.all_num + self.eps)
         norm_edit_dis = 1 - self.norm_edit_dis / (self.all_num + self.eps)
-        cer = self.cer / self.char_num
+        cer = 1 - (self.cer / self.char_num)
         self.reset()
         return {'acc': acc, 'norm_edit_dis': norm_edit_dis, 'cer': cer}
 
