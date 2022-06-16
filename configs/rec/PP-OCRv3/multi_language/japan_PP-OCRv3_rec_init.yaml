@@ -5,7 +5,7 @@ Global:
   log_smooth_window: 20
   print_batch_step: 10
   save_model_dir: ./output/v3_japan_mobile_init
-  save_epoch_step: 3
+  save_epoch_step: 100
   eval_batch_step: [0, 100]
   cal_metric_during_train: true
   pretrained_model: ./japan_PP-OCRv3_rec_train/best_accuracy

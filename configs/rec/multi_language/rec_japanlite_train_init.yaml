@@ -1,12 +1,12 @@
 Global:
   use_gpu: True
-  epoch_num: 5000
+  epoch_num: 500
   log_smooth_window: 20
   print_batch_step: 10
   save_model_dir: ./output/rec_japan_lite_init
-  save_epoch_step: 3
+  save_epoch_step: 100
   # evaluation is run every 5000 iterations after the 4000th iteration
-  eval_batch_step: [0, 2000]
+  eval_batch_step: [0, 100]
   # if pretrained_model is saved in static mode, load_static_weights must set to True
   cal_metric_during_train: True
   pretrained_model: ./japan_mobile_v2.0_rec_train/best_accuracy
