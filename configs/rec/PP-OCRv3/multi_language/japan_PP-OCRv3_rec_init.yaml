@@ -70,7 +70,7 @@ PostProcess:
 
 Metric:
   name: RecMetric
-  main_indicator: cer
+  main_indicator: 1-cer
   ignore_space: False
 
 Train:
