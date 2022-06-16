@@ -34,7 +34,7 @@ import tools.program as program
 def main():
     global_config = config['Global']
     # build dataloader
-    valid_dataloader = build_dataloader(config, 'Eval', device, logger)
+    valid_dataloader = build_dataloader(config, 'Test', device, logger)
 
     # build post process
     post_process_class = build_post_process(config['PostProcess'],

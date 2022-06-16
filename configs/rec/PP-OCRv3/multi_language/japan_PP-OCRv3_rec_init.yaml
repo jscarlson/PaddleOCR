@@ -129,3 +129,28 @@ Eval:
     drop_last: false
     batch_size_per_card: 128
     num_workers: 4
+Test:
+  dataset:
+    name: SimpleDataSet
+    data_dir: ./train_data/rec/pr_test
+    label_file_list:
+    - "./train_data/rec/pr_rec_gt_test.txt"
+    transforms:
+    - DecodeImage:
+        img_mode: BGR
+        channel_first: false
+    - MultiLabelEncode:
+    - RecResizeImg:
+        image_shape: [3, 48, 320]
+    - KeepKeys:
+        keep_keys:
+        - image
+        - label_ctc
+        - label_sar
+        - length
+        - valid_ratio
+  loader:
+    shuffle: false
+    drop_last: false
+    batch_size_per_card: 128
+    num_workers: 4
