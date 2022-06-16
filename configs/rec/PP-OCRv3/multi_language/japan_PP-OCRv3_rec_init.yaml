@@ -107,7 +107,7 @@ Train:
 Eval:
   dataset:
     name: SimpleDataSet
-    data_dir: ./train_data/rec/pr_train
+    data_dir: ./train_data/rec/pr_val
     label_file_list:
     - "./train_data/rec/pr_rec_gt_val.txt"
     transforms:
