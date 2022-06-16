@@ -9,7 +9,7 @@ if __name__ == "__main__":
 
     with open(args.dict_file) as f:
         chars_dec= f.read().split()
-        chars = [chr(c) for c in chars_dec]
+        chars = [chr(int(c)) for c in chars_dec]
 
     print(f"Len of char set: {len(chars)}")
 
