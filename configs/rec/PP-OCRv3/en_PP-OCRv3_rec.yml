@@ -5,20 +5,20 @@ Global:
   log_smooth_window: 20
   print_batch_step: 10
   save_model_dir: ./output/v3_en_mobile
-  save_epoch_step: 3
-  eval_batch_step: [0, 2000]
+  save_epoch_step: 100
+  eval_batch_step: [0, 100]
   cal_metric_during_train: true
-  pretrained_model:
+  pretrained_model: ./en_PP-OCRv3_rec_train/best_accuracy
   checkpoints:
   save_inference_dir:
-  use_visualdl: false
-  infer_img: doc/imgs_words/ch/word_1.jpg
-  character_dict_path: ppocr/utils/en_dict.txt
+  use_wandb: true
+  infer_img:
+  character_dict_path: /mnt/122a7683-fa4b-45dd-9f13-b18cc4f4a187/github_repos/ocr-as-retrieval/full_charset_en.txt
   max_text_length: &max_text_length 25
   infer_mode: false
   use_space_char: true
   distributed: true
-  save_res_path: ./output/rec/predicts_ppocrv3_en.txt
+  save_res_path:
 
 
 Optimizer:
@@ -70,16 +70,16 @@ PostProcess:
 
 Metric:
   name: RecMetric
-  main_indicator: acc
+  main_indicator: 1-cer
   ignore_space: False
 
 Train:
   dataset:
     name: SimpleDataSet
-    data_dir: ./train_data/
+    data_dir: ./train_data/rec/locca_train
     ext_op_transform_idx: 1
     label_file_list:
-    - ./train_data/train_list.txt
+    - "./train_data/rec/locca_rec_gt_train.txt"
     transforms:
     - DecodeImage:
         img_mode: BGR
@@ -107,9 +107,9 @@ Train:
 Eval:
   dataset:
     name: SimpleDataSet
-    data_dir: ./train_data
+    data_dir: ./train_data/rec/locca_val
     label_file_list:
-    - ./train_data/val_list.txt
+    - "./train_data/rec/locca_rec_gt_val.txt"
     transforms:
     - DecodeImage:
         img_mode: BGR
@@ -127,5 +127,30 @@ Eval:
   loader:
     shuffle: false
     drop_last: false
-    batch_size_per_card: 128
+    batch_size_per_card: 1
+    num_workers: 4
+Test:
+  dataset:
+    name: SimpleDataSet
+    data_dir: ./train_data/rec/locca_test
+    label_file_list:
+    - "./train_data/rec/locca_rec_gt_test.txt"
+    transforms:
+    - DecodeImage:
+        img_mode: BGR
+        channel_first: false
+    - MultiLabelEncode:
+    - RecResizeImg:
+        image_shape: [3, 48, 320]
+    - KeepKeys:
+        keep_keys:
+        - image
+        - label_ctc
+        - label_sar
+        - length
+        - valid_ratio
+  loader:
+    shuffle: false
+    drop_last: false
+    batch_size_per_card: 1
     num_workers: 4
