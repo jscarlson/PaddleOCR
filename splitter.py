@@ -68,5 +68,5 @@ if __name__ == "__main__":
     if not args.char_text_file is None:
         with open(args.char_text_file) as f:
             chars = "".join(chr(int(i)) for i in f.read().split()) + " "
-        with open(os.path.join(SAVE_DIR, f"{args.dataset_name}_chars.txt")) as f:
+        with open(os.path.join(SAVE_DIR, f"{args.dataset_name}_chars.txt", "w")) as f:
             f.write("\n".join(chars))
