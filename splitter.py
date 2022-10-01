@@ -23,6 +23,7 @@ if __name__ == "__main__":
     parser.add_argument("--coco_train_name", type=str, required=True)
     parser.add_argument("--coco_val_name", type=str, required=True)
     parser.add_argument("--coco_test_name", type=str, required=True)
+    parser.add_argument("--char_text_file", type=str, required=False, default=None)
     args = parser.parse_args()
 
     # set up initial dirs
@@ -62,3 +63,10 @@ if __name__ == "__main__":
     create_datasets(train_img_basenames, train_texts, image_dir, train_dir, SAVE_DIR, "train", args.dataset_name)
     create_datasets(val_img_basenames, val_texts, image_dir, val_dir, SAVE_DIR, "val", args.dataset_name)
     create_datasets(test_img_basenames, test_texts, image_dir, test_dir, SAVE_DIR, "test", args.dataset_name)
+
+    # convert char text file
+    if not args.char_text_file is None:
+        with open(args.char_text_file) as f:
+            chars = "".join(chr(int(i)) for i in f.read().split()) + " "
+        with open(os.path.join(SAVE_DIR, f"{args.dataset_name}_chars.txt")) as f:
+            f.write("\n".join(chars))
