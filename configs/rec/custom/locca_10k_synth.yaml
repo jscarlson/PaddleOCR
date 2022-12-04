@@ -11,7 +11,7 @@ Global:
   pretrained_model:
   checkpoints:
   save_inference_dir:
-  use_wandb: false
+  use_wandb: true
   infer_img:
   character_dict_path: ./train_data/rec/locca_10k_synth_chars.txt
   max_text_length: &max_text_length 64
@@ -19,6 +19,11 @@ Global:
   use_space_char: true
   distributed: true
   save_res_path:
+
+
+wandb:  
+    project: PaddleOCR_v2  # (optional) this is the wandb project name 
+    name: locca_10k_synth  # (optional) this is the name of the wandb run
 
 
 Optimizer:
