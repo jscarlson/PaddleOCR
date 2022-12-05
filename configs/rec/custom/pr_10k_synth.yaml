@@ -4,7 +4,7 @@ Global:
   epoch_num: 500
   log_smooth_window: 20
   print_batch_step: 100
-  save_model_dir: ./output/pr_10k_synth
+  save_model_dir: ./output/pr_10k_synth_const
   save_epoch_step: 100
   eval_batch_step: [0, 100]
   cal_metric_during_train: true
