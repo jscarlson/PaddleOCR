@@ -95,6 +95,8 @@ class RecMetric(object):
 
     def __call__(self, pred_label, *args, **kwargs):
         preds, labels = pred_label
+        self.preds = preds
+        self.labels = labels
         correct_num = 0
         all_num = 0
         char_num = 0
@@ -144,8 +146,15 @@ class RecMetric(object):
         acc = 1.0 * self.correct_num / (self.all_num + self.eps)
         norm_edit_dis = 1 - self.norm_edit_dis / (self.all_num + self.eps)
         cer = self.cer / self.char_num
+        cer_custom = textline_evaluation(
+            [(target, pred) for (pred, _), (target, _) in zip(self.preds, self.labels)],
+            print_incorrect=False, 
+            no_spaces_in_eval=False, 
+            norm_edit_distance=False, 
+            uncased=True
+        )
         self.reset()
-        return {'acc': acc, 'norm_edit_dis': norm_edit_dis, 'cer': cer, '1-cer': 1 - cer}
+        return {'acc': acc, 'norm_edit_dis': norm_edit_dis, 'cer': cer, '1-cer': 1 - cer, 'cer_custom': cer_custom}
 
     def reset(self):
         self.correct_num = 0
