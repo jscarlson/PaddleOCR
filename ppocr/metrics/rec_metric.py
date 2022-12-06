@@ -126,7 +126,7 @@ class RecMetric(object):
             '1-cer': 1 - (cer / char_num),
             'cer': cer / char_num,
             'cer_custom': textline_evaluation(
-                list(zip(labels, preds)),
+                [(target, pred) for (pred, _), (target, _) in zip(preds, labels)],
                 print_incorrect=False, 
                 no_spaces_in_eval=False, 
                 norm_edit_distance=False, 
