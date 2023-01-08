@@ -154,7 +154,7 @@ class RecMetric(object):
             print_incorrect=False, 
             no_spaces_in_eval=False, 
             norm_edit_distance=False, 
-            uncased=False
+            uncased=True
         )
         self.reset()
         return {'acc': acc, 'norm_edit_dis': norm_edit_dis, 'cer': cer, '1-cer': 1 - cer, 'cer_custom': cer_custom}
