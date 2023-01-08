@@ -86,6 +86,8 @@ class RecMetric(object):
         self.is_filter = is_filter
         self.ignore_space = ignore_space
         self.eps = 1e-5
+        self.preds = []
+        self.labels = []
         self.reset()
 
     def _normalize_text(self, text):
@@ -95,8 +97,8 @@ class RecMetric(object):
 
     def __call__(self, pred_label, *args, **kwargs):
         preds, labels = pred_label
-        self.preds = preds
-        self.labels = labels
+        self.preds.extend(preds)
+        self.labels.extend(labels)
         correct_num = 0
         all_num = 0
         char_num = 0
