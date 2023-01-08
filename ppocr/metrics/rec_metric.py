@@ -111,7 +111,7 @@ class RecMetric(object):
                 target = self._normalize_text(target)
             norm_edit_dis += Levenshtein.distance(pred, target) / max(
                 len(pred), len(target), 1)
-            cer += edit_distance(pred, target)
+            cer += edit_distance(pred.lower(), target.lower())
             assert edit_distance(pred, target) == Levenshtein.distance(pred, target)
             if pred == target:
                 correct_num += 1
