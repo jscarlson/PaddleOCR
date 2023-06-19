@@ -3,10 +3,10 @@ Global:
   use_gpu: true
   epoch_num: 500
   log_smooth_window: 20
-  print_batch_step: 1000
+  print_batch_step: 100
   save_model_dir: ./output/synth16k_pretrain
-  save_epoch_step: 1000
-  eval_batch_step: [0, 1000]
+  save_epoch_step: 100
+  eval_batch_step: [0, 100]
   cal_metric_during_train: true
   pretrained_model:
   checkpoints:

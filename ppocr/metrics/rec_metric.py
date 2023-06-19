@@ -148,7 +148,7 @@ class RecMetric(object):
         acc = 1.0 * self.correct_num / (self.all_num + self.eps)
         norm_edit_dis = 1 - self.norm_edit_dis / (self.all_num + self.eps)
         cer = self.cer / self.char_num
-        print(list(zip(self.preds, self.labels)))
+        # print(list(zip(self.preds, self.labels)))
         cer_custom = textline_evaluation(
             [(target, pred) for (pred, _), (target, _) in zip(self.preds, self.labels)],
             print_incorrect=False, 
