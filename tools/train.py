@@ -121,6 +121,7 @@ def main(config, device, logger, vdl_writer):
     model = build_model(config['Architecture'])
     if config['Global']['distributed']:
         model = paddle.DataParallel(model)
+        print("*******\n\n\nMODEL IS PARALLEL\n\n\n********")
 
     model = apply_to_static(model, config, logger)
 
