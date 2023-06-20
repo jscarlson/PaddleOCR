@@ -1,13 +1,13 @@
 Global:
   debug: false
   use_gpu: true
-  epoch_num: 100
+  epoch_num: 250
   log_smooth_window: 50
-  print_batch_step: 25
+  print_batch_step: 20
   save_model_dir: ./output/synth16k_pretrain
   save_epoch_step: 1
-  eval_batch_step: 250
-  cal_metric_during_train: true
+  eval_batch_step: 50
+  cal_metric_during_train: false
   pretrained_model:
   checkpoints:
   save_inference_dir:
