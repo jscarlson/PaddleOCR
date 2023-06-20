@@ -86,8 +86,6 @@ class RecMetric(object):
         self.is_filter = is_filter
         self.ignore_space = ignore_space
         self.eps = 1e-5
-        self.preds = []
-        self.labels = []
         self.reset()
 
     def _normalize_text(self, text):
@@ -97,13 +95,9 @@ class RecMetric(object):
 
     def __call__(self, pred_label, *args, **kwargs):
         preds, labels = pred_label
-        self.preds.extend(preds)
-        self.labels.extend(labels)
         correct_num = 0
         all_num = 0
-        char_num = 0
         norm_edit_dis = 0.0
-        cer = 0
         for (pred, pred_conf), (target, _) in zip(preds, labels):
             if self.ignore_space:
                 pred = pred.replace(" ", "")
@@ -111,31 +105,16 @@ class RecMetric(object):
             if self.is_filter:
                 pred = self._normalize_text(pred)
                 target = self._normalize_text(target)
-            norm_edit_dis += Levenshtein.distance(pred, target) / max(
-                len(pred), len(target), 1)
-            cer += edit_distance(pred, target)
-            assert edit_distance(pred, target) == Levenshtein.distance(pred, target)
+            norm_edit_dis += Levenshtein.normalized_distance(pred, target)
             if pred == target:
                 correct_num += 1
             all_num += 1
-            char_num += len(target)
         self.correct_num += correct_num
         self.all_num += all_num
         self.norm_edit_dis += norm_edit_dis
-        self.cer += cer
-        self.char_num += char_num
         return {
             'acc': correct_num / (all_num + self.eps),
-            'norm_edit_dis': 1 - norm_edit_dis / (all_num + self.eps),
-            '1-cer': 1 - (cer / char_num),
-            'cer': cer / char_num,
-            'cer_custom': textline_evaluation(
-                [(target, pred) for (pred, _), (target, _) in zip(preds, labels)],
-                print_incorrect=False, 
-                no_spaces_in_eval=False, 
-                norm_edit_distance=False, 
-                uncased=True
-            )
+            'norm_edit_dis': 1 - norm_edit_dis / (all_num + self.eps)
         }
 
     def get_metric(self):
@@ -147,21 +126,10 @@ class RecMetric(object):
         """
         acc = 1.0 * self.correct_num / (self.all_num + self.eps)
         norm_edit_dis = 1 - self.norm_edit_dis / (self.all_num + self.eps)
-        cer = self.cer / self.char_num
-        # print(list(zip(self.preds, self.labels)))
-        cer_custom = textline_evaluation(
-            [(target, pred) for (pred, _), (target, _) in zip(self.preds, self.labels)],
-            print_incorrect=False, 
-            no_spaces_in_eval=False, 
-            norm_edit_distance=False, 
-            uncased=True
-        )
         self.reset()
-        return {'acc': acc, 'norm_edit_dis': norm_edit_dis, 'cer': cer, '1-cer': 1 - cer, 'cer_custom': cer_custom}
+        return {'acc': acc, 'norm_edit_dis': norm_edit_dis}
 
     def reset(self):
         self.correct_num = 0
         self.all_num = 0
         self.norm_edit_dis = 0
-        self.cer = 0
-        self.char_num = 0
