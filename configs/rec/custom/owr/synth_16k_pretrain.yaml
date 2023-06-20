@@ -1,12 +1,12 @@
 Global:
   debug: false
   use_gpu: true
-  epoch_num: 500
+  epoch_num: 250
   log_smooth_window: 20
-  print_batch_step: 100
+  print_batch_step: 50
   save_model_dir: ./output/synth16k_pretrain
-  save_epoch_step: 100
-  eval_batch_step: [0, 100]
+  save_epoch_step: 50
+  eval_batch_step: [0, 50]
   cal_metric_during_train: true
   pretrained_model:
   checkpoints:
@@ -106,7 +106,7 @@ Train:
         - valid_ratio
   loader:
     shuffle: true
-    batch_size_per_card: 32
+    batch_size_per_card: 64
     drop_last: true
     num_workers: 4
 Eval:
