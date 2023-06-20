@@ -44,7 +44,6 @@ dist.get_world_size()
 def main(config, device, logger, vdl_writer):
     # init dist environment
     if config['Global']['distributed']:
-        print("distr true")
         dist.init_parallel_env()
 
     global_config = config['Global']
@@ -122,7 +121,7 @@ def main(config, device, logger, vdl_writer):
     model = build_model(config['Architecture'])
     if config['Global']['distributed']:
         model = paddle.DataParallel(model)
-        print("*******\n\n\nMODEL IS PARALLEL\n\n\n********")
+        logger.info("*******\n\n\nMODEL IS PARALLEL\n\n\n********")
 
     model = apply_to_static(model, config, logger)
 
