@@ -3,10 +3,10 @@ Global:
   use_gpu: true
   epoch_num: 200
   log_smooth_window: 20
-  print_batch_step: 125
+  print_batch_step: 250
   save_model_dir: ./output/synth16k_pretrain
   save_epoch_step: 50
-  eval_batch_step: [0, 125]
+  eval_batch_step: [0, 250]
   cal_metric_during_train: true
   pretrained_model:
   checkpoints:
@@ -106,9 +106,9 @@ Train:
         - valid_ratio
   loader:
     shuffle: true
-    batch_size_per_card: 256
+    batch_size_per_card: 32
     drop_last: true
-    num_workers: 16
+    num_workers: 4
 Eval:
   dataset:
     name: SimpleDataSet
