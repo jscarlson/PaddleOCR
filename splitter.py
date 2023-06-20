@@ -72,8 +72,6 @@ if __name__ == "__main__":
         train_texts += silver_texts
     print(f"Len val ims {len(val_img_basenames)}; len train ims \
         {len(train_img_basenames)}; len test ims {len(test_img_basenames)}")
-    print(f"Len val ims {len(val_img_basenames)}; len train ims \
-        {len(train_img_basenames)}; len test ims {len(test_img_basenames)}")
 
     # create datasets for train and test
     create_datasets(train_img_basenames, train_texts, image_dir, train_dir, SAVE_DIR, "train", args.dataset_name)
