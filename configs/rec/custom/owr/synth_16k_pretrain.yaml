@@ -60,15 +60,15 @@ Architecture:
             use_guide: True
           Head:
             fc_decay: 0.00001
-      - SARHead:
-          enc_dim: 512
-          max_text_length: *max_text_length
+      #- SARHead:
+      #    enc_dim: 512
+      #    max_text_length: *max_text_length
 
 Loss:
   name: MultiLoss
   loss_config_list:
     - CTCLoss:
-    - SARLoss:
+    #- SARLoss:
 
 PostProcess:  
   name: CTCLabelDecode
@@ -101,7 +101,7 @@ Train:
         keep_keys:
         - image
         - label_ctc
-        - label_sar
+        #- label_sar
         - length
         - valid_ratio
   loader:
@@ -126,7 +126,7 @@ Eval:
         keep_keys:
         - image
         - label_ctc
-        - label_sar
+        #- label_sar
         - length
         - valid_ratio
   loader:
@@ -151,7 +151,7 @@ Test:
         keep_keys:
         - image
         - label_ctc
-        - label_sar
+        #- label_sar
         - length
         - valid_ratio
   loader:
