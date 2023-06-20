@@ -11,7 +11,7 @@ Global:
   pretrained_model:
   checkpoints:
   save_inference_dir:
-  use_wandb: false
+  use_wandb: true
   infer_img:
   character_dict_path: ./train_data/rec/synth16k_pretrain_chars.txt
   max_text_length: &max_text_length 64
