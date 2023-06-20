@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import Levenshtein
+from rapidfuzz.distance import Levenshtein
 import string
 from nltk.metrics.distance import edit_distance
 
