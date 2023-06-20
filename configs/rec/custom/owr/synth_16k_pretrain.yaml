@@ -17,7 +17,7 @@ Global:
   max_text_length: &max_text_length 128
   infer_mode: false
   use_space_char: true
-  distributed: true
+  distributed: false
   save_res_path:
 
 
