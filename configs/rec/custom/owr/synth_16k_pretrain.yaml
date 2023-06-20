@@ -75,7 +75,7 @@ PostProcess:
 
 Metric:
   name: RecMetric
-  main_indicator: 1-cer
+  main_indicator: norm_edit_dis
   ignore_space: False
 
 Train:
