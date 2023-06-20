@@ -4,6 +4,13 @@ import json
 import argparse
 
 
+PUNC_REPLACE_DICT = {'$': ',', '@': '.', '#': '-', '_': ' '}
+
+
+def silver_line_extract_text(s):
+    return "".join([PUNC_REPLACE_DICT[x] if x in PUNC_REPLACE_DICT else x for x in os.path.splitext(s)[0].split("-")[-1]])
+
+
 def create_datasets(seg_basenames, seg_texts, seg_dir, image_save_dir, save_dir, data_split, dataset_name):
     labeled_pairs = []
     for fn, txt in zip(seg_basenames, seg_texts):
@@ -24,6 +31,7 @@ if __name__ == "__main__":
     parser.add_argument("--coco_val_name", type=str, required=True)
     parser.add_argument("--coco_test_name", type=str, required=True)
     parser.add_argument("--char_text_file", type=str, required=False, default=None)
+    parser.add_argument("--silver_json_name", type=str, required=False, default=None)
     args = parser.parse_args()
 
     # set up initial dirs
@@ -56,6 +64,14 @@ if __name__ == "__main__":
     train_texts = [x['text'] for x in coco_train["images"]]
     val_texts = [x['text'] for x in coco_val["images"]]
     test_texts = [x['text'] for x in coco_test["images"]]
+    if not args.silver_json_name is None:
+        with open(os.path.join(args.root_dir, args.silver_json_name)) as f:
+            silver_img_basenames = json.load(f)
+        silver_texts = [silver_line_extract_text(x) for x in silver_img_basenames]
+        train_img_basenames += silver_img_basenames
+        train_texts += silver_texts
+    print(f"Len val ims {len(val_img_basenames)}; len train ims \
+        {len(train_img_basenames)}; len test ims {len(test_img_basenames)}")
     print(f"Len val ims {len(val_img_basenames)}; len train ims \
         {len(train_img_basenames)}; len test ims {len(test_img_basenames)}")
 
